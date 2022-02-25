@@ -1,9 +1,11 @@
 import './Book.css';
+import BookHeader from './BookHeader';
+
 const Book = (props) => {
     return (
         <div className="books">
-            <h2>{props.book.title}</h2>
-            <hr/>
+            <BookHeader title = {props.book.title} />
+            <hr />
             <p>{props.book.description}</p>
         </div>
     );

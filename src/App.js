@@ -18,8 +18,10 @@ const App = () => {
   ];
   return (
     <div>
-      <h1 class="header">Book library</h1>
+      <h1 className="header">Book library</h1>
       <Book book = {books[0]} />
+      <Book book = {books[1]} />
+      <Book book = {books[2]} />
     </div>
   );
 }

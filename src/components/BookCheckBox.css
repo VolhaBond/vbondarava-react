@@ -1,0 +1,6 @@
+.book_selected {
+    box-shadow: 0 1px 8px rgb(96, 98, 99);
+}
+#book_chkbox {
+    float:right;
+}
