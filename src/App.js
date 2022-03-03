@@ -1,4 +1,5 @@
-import Book from './components/Book';
+import Book from './Book';
+import './Book.css';
 import './index.css';
 
 const App = () => {
@@ -16,12 +17,13 @@ const App = () => {
       description: 'The most important selling points of Head First Java is its simplicity and super-effective real-life analogies that pertain to the Java programming concepts.',
     },
   ];
+
   return (
     <div>
       <h1 className="header">Book library</h1>
-      <Book book = {books[0]} />
-      <Book book = {books[1]} />
-      <Book book = {books[2]} />
+      <Book className="book" book={books[0]} />
+      <Book className="book" book={books[1]} />
+      <Book className="book" book={books[2]} />
     </div>
   );
 }
