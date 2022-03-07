@@ -1,5 +1,4 @@
-import Book from './Book';
-import './Book.css';
+import Card from './Card';
 import './index.css';
 
 const App = () => {
@@ -21,9 +20,7 @@ const App = () => {
   return (
     <div>
       <h1 className="header">Book library</h1>
-      <Book className="book" book={books[0]} />
-      <Book className="book" book={books[1]} />
-      <Book className="book" book={books[2]} />
+      <Card className="book" card={books[0]} />
     </div>
   );
 }
