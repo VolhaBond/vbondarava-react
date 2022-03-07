@@ -20,7 +20,7 @@ const App = () => {
   return (
     <div>
       <h1 className="header">Book library</h1>
-      <Card className="book" card={books[0]} />
+      <Card className="card" card={books[0]} />
     </div>
   );
 }
