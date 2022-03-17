@@ -1,11 +1,9 @@
-import {useState} from 'react';
 import CardCheckBox from './CardCheckBox';
 import { VscEdit } from 'react-icons/vsc';
 import './Card.css';
 
 const CardInViewMode = props => {
-    const [checked, setChecked] = useState('');
-
+    
     const cardEditHandler = () => {
         props.onChangeMode(false);
     }

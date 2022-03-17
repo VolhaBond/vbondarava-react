@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { VscSave } from 'react-icons/vsc';
 import { VscClose } from 'react-icons/vsc';
 import './CardInEditMode.css';
@@ -17,19 +17,13 @@ const CardInEditMode = props => {
     const cardCloseHandler = () => {
         props.onClose(true);
     }
-
-    const handleTitleChange = event => {
+   
+    const handleObjChange = event => {
+        const updatedproperty = event.target.getAttribute("updatedProperty");
         setUpdatedCard({
             ...updatedCard,
-            updatedTitle: event.target.value
-        })
-    }
-
-    const handleDescriptionChange = event => {
-       setUpdatedCard({
-           ...updatedCard,
-           updatedDescription: event.target.value
-       })
+            [updatedproperty]: event.target.value
+        });
     }
 
     return (
@@ -39,10 +33,10 @@ const CardInEditMode = props => {
                     <VscSave onClick={cardSaveChangesHandler} />
                     <VscClose onClick={cardCloseHandler} />
                 </div>
-                <input type="text" className="inputTextBox" value={updatedCard.updatedTitle} onChange={handleTitleChange} />
+                <input type="text" updatedproperty="updatedTitle" className="inputTextBox" value={updatedCard.updatedTitle} onChange={handleObjChange} />
             </h2>
             <hr />
-            <p><input type="text" className="inputTextBox" value={updatedCard.updatedDescription} onChange={handleDescriptionChange} /></p>
+            <p><input type="text" updatedproperty="updatedDescription" className="inputTextBox" value={updatedCard.updatedDescription} onChange={handleObjChange} /></p>
         </div>
     );
 }
