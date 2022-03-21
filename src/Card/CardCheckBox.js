@@ -5,7 +5,7 @@ const CardCheckBox = props => {
         props.onCheck(e.target.checked);
     }
 
-    return <input type="checkbox" id="card_chkbox" onClick={checkCardHandler} />
+    return <input type="checkbox" id="card_chkbox" defaultChecked={props.checked} onClick={checkCardHandler} />
 }
 
 export default CardCheckBox;
