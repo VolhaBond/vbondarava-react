@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import Card from './Card';
+
+import CardList from './Card/CardList';
 import './index.css';
 
 const App = () => {
   const [viewModeOnlyChecked, setViewModeOnlyChecked] = useState(false);
-   
+
   const [cards, setCards] = useState([{
     id: 1,
     title: 'Core Java Volume I – Fundamentals',
@@ -43,25 +44,20 @@ const App = () => {
   ]);
 
   const cardUpdateHandler = updatedCard => {
-    cards.map(card => {
-      if (card.id === updatedCard.id){
-        card.title = updatedCard.title;
-        card.description = updatedCard.description;
-      }
-      return card;
-    });
+    const index = cards.findIndex(card => card.id === updatedCard.id);
+    cards[index] = updatedCard;
+    setCards([...cards]);
   }
 
   const setViewModeOnlyHandler = () => {
-    const viewModeOnly = !viewModeOnlyChecked;
-    setViewModeOnlyChecked(viewModeOnly);
-}
+    setViewModeOnlyChecked(!viewModeOnlyChecked);
+  }
 
   return (
     <div>
       <h1 className="header">Book library</h1>
       <label> <input type="checkbox" id="card_onlyviewmode" onClick={setViewModeOnlyHandler} />Только просмотр</label>
-      {cards.map((card) => <Card className="card" key={card.id} card={card} viewModeOnly={viewModeOnlyChecked} onUpdate={cardUpdateHandler} />)}
+        <CardList cards={cards} viewModeOnlyChecked={viewModeOnlyChecked} onUpdate={cardUpdateHandler} />
     </div>
   );
 }

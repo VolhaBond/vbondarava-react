@@ -22,11 +22,7 @@ const CardHeader = props => {
         props.onSetViewMode(true);
         props.onClose();
     }
-
-    const checkViewModeCardHandler = () => {
-        props.onCheckViewModeOnly();
-    }
-
+    
     const header = () => {
         const checkBoxContent = (<div>
             <h2>
