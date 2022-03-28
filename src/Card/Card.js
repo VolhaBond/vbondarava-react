@@ -1,22 +1,46 @@
 import { useState } from 'react';
-import CardCheckBox from './CardCheckBox';
+import CardHeader from './CardHeader';
+import CardBody from './CardBody';
 import './Card.css';
-import './CardInEditMode.css';
-import { VscEdit, VscSave, VscClose } from 'react-icons/vsc';
 
 const classNames = require('classnames');
 
 const Card = props => {
-    const [updatedCard, setUpdatedCard] = useState({
-        updatedTitle: props.card.title,
-        updatedDescription: props.card.description
-    })
-    const [checked, setChecked] = useState(false);
-    const [viewMode, setViewMode] = useState(true);
     
-    const cardSaveChangesHandler = () => {
+    const [updatedCard, setUpdatedCard] = useState({...props.card})
+    
+    const [viewMode, setViewMode] = useState(true);
+    const [checked, setChecked] = useState(false);
+    
+    if (props.viewModeOnly && !viewMode) {
+        setViewMode(true);
+        setUpdatedCard({
+            ...props.card
+        });
+    }
+
+    const cardCloseHandler = () => {
+        setUpdatedCard({
+            ...props.card
+        });
+    }
+      
+    const cardUpdateHandler = () => {
         setViewMode(true);
         props.onUpdate(updatedCard);
+    }
+
+    const setCheckedHandler = isChecked => {
+        setChecked(isChecked);
+    }
+
+    const cardClass = classNames(
+        props.className,
+        { 'card_selected': checked }
+    );
+
+    const setViewModeHandler = viewMode => {
+        setViewMode(viewMode);
     }
 
     const handleObjChange = event => {
@@ -26,50 +50,25 @@ const Card = props => {
             [updatedproperty]: event.target.value
         });
     }
-    const cardEditHandler = () => {
-        setChecked(false);
-        setViewMode(false);
-    }
-
-    const cardCheckHandler = checked => {
-        setChecked(checked);
-    }
-
-    const cardCloseHandler = () => {
-        setChecked(false);
-        setViewMode(true);
-    }
-
-    const cardClass = classNames(
-        props.className,
-        { 'card_selected': checked }
-    );
 
     return (
         <div className={cardClass}>
-            {viewMode ?
-                <div>
-                    <h2>
-                        <VscEdit className="icon" onClick={cardEditHandler} />
-                        <CardCheckBox onCheck={cardCheckHandler} />
-                        <label>{props.card.title}</label>
-                    </h2>
-                    <hr />
-                    <p>{props.card.description}</p>
-                </div>
-                :
-                <div>
-                    <h2>
-                        <div className="icon">
-                            <VscSave onClick={cardSaveChangesHandler} />
-                            <VscClose onClick={cardCloseHandler} />
-                        </div>
-                        <input type="text" updatedproperty="updatedTitle" className="inputTextBox" value={updatedCard.updatedTitle} onChange={handleObjChange} />
-                    </h2>
-                    <hr />
-                    <p><input type="text" updatedproperty="updatedDescription" className="inputTextBox" value={updatedCard.updatedDescription} onChange={handleObjChange} /></p>
-                </div>
-            }
+            <CardHeader 
+                card={props.card} 
+                viewMode={viewMode} 
+                viewModeOnly={props.viewModeOnly}
+                checked={checked}
+                onSetViewMode={setViewModeHandler} 
+                onUpdate={cardUpdateHandler} 
+                onClose={cardCloseHandler}
+                onCheck={setCheckedHandler} 
+            />
+            <CardBody 
+                card={props.card} 
+                updatedCard={updatedCard} 
+                viewMode={viewMode} 
+                onChange={handleObjChange} 
+            />
         </div>
     );
 }

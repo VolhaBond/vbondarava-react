@@ -1,26 +1,64 @@
 import { useState } from 'react';
-import Card from './Card';
+
+import CardList from './Card/CardList';
 import './index.css';
 
 const App = () => {
-  
-  const [card, setCard] = useState({
-    title: 'Core Java Volume I – Fundamentals',
-    description: 'Core Java Volume I – Fundamentals is a Java reference book (Best book for Java)that offers a detailed explanation of various features of Core Java, including exception handling, interfaces, and lambda expressions. ',
-  });
+  const [viewModeOnlyChecked, setViewModeOnlyChecked] = useState(false);
 
-  const cardUpdateHandler = card => {
-    setCard({
-      ...card,
-      title: card.updatedTitle,
-      description: card.updatedDescription
-    });
+  const [cards, setCards] = useState([{
+    id: 1,
+    title: 'Core Java Volume I – Fundamentals',
+    description: 'Java reference book. ',
+  },
+  {
+    id: 2,
+    title: 'Title2',
+    description: 'Description2. ',
+  },
+  {
+    id: 3,
+    title: 'Title3',
+    description: 'Description3. ',
+  },
+  {
+    id: 4,
+    title: 'Title4',
+    description: 'Description4. ',
+  },
+  {
+    id: 5,
+    title: 'Title5',
+    description: 'Description5. ',
+  },
+  {
+    id: 6,
+    title: 'Title6',
+    description: 'Description6. ',
+  },
+  {
+    id: 7,
+    title: 'Title7',
+    description: 'Description7. ',
+  }
+  ]);
+
+  const cardUpdateHandler = updatedCard => {
+    let cardsCopy = [...cards];
+    const index = cardsCopy.findIndex(card => card.id === updatedCard.id);
+    cardsCopy[index] = updatedCard;
+    setCards([...cardsCopy]);
+  }
+
+  const setViewModeOnlyHandler = () => {
+    setViewModeOnlyChecked(!viewModeOnlyChecked);
   }
 
   return (
     <div>
       <h1 className="header">Book library</h1>
-      <Card className="card" onUpdate={cardUpdateHandler} card={card} />
+      <label> <input type="checkbox" id="card_onlyviewmode" onClick={setViewModeOnlyHandler} />Только просмотр</label>
+        <CardList cards={cards} viewModeOnlyChecked={viewModeOnlyChecked} onUpdate={cardUpdateHandler} />
     </div>
   );
 }
