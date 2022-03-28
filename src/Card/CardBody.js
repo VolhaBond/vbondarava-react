@@ -18,11 +18,12 @@ const CardBody = props => {
                 </div>
                 :
                 <div>
-                    <input type="text" updatedproperty="title" className="inputTextBox" value={props.updatedCard.title} onChange={handleObjChange} />
+                    <p><input type="text" updatedproperty="title" className="inputTextBox" value={props.updatedCard.title} onChange={handleObjChange} /></p>
                     <hr />
                     <p><input type="text" updatedproperty="description" className="inputTextBox" value={props.updatedCard.description} onChange={handleObjChange} /></p>
                 </div>
             }
+
         </div>
     );
 }

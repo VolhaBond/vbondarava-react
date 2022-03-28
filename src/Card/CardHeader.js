@@ -22,12 +22,12 @@ const CardHeader = props => {
         props.onSetViewMode(true);
         props.onClose();
     }
-    
+
     const header = () => {
         const checkBoxContent = (<div>
-            <h2>
-                <CardCheckBox checked={props.checked} onCheck={cardCheckHandler} />
-            </h2>
+
+            <CardCheckBox checked={props.checked} onCheck={cardCheckHandler} />
+
         </div>);
 
         if (props.viewModeOnly) {
@@ -37,26 +37,19 @@ const CardHeader = props => {
         } else {
             if (props.viewMode) {
                 return <div>
-                    <h2>
-                        <VscEdit className="icon" onClick={cardEditHandler} />
-                        {checkBoxContent}
-                    </h2>
+                    <VscEdit className="icon" onClick={cardEditHandler} />
+                    {checkBoxContent}
                 </div>
             }
-            return < div >
-                <h2>
-                    <div className="icon">
-                        <VscSave onClick={cardSaveChangesHandler} />
-                        <VscClose onClick={cardCloseHandler} />
-                    </div>
-
-                </h2>
-            </div >
+            return <div className="icon">
+                <VscSave onClick={cardSaveChangesHandler} />
+                <VscClose onClick={cardCloseHandler} />
+            </div>
         }
     }
 
     return (
-        <div>
+        <div >
             {header()}
         </div>
     );
