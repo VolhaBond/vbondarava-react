@@ -44,9 +44,10 @@ const App = () => {
   ]);
 
   const cardUpdateHandler = updatedCard => {
-    const index = cards.findIndex(card => card.id === updatedCard.id);
-    cards[index] = updatedCard;
-    setCards([...cards]);
+    let cardsCopy = [...cards];
+    const index = cardsCopy.findIndex(card => card.id === updatedCard.id);
+    cardsCopy[index] = updatedCard;
+    setCards([...cardsCopy]);
   }
 
   const setViewModeOnlyHandler = () => {
