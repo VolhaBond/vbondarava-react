@@ -32,6 +32,7 @@ const Card = props => {
 
     const setCheckedHandler = isChecked => {
         setChecked(isChecked);
+        props.onUpdateCheckedCardList(props.card.id, isChecked);
     }
 
     const cardClass = classNames(

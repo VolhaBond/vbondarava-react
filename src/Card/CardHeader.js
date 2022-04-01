@@ -25,9 +25,7 @@ const CardHeader = props => {
 
     const header = () => {
         const checkBoxContent = (<div>
-
             <CardCheckBox checked={props.checked} onCheck={cardCheckHandler} />
-
         </div>);
 
         if (props.viewModeOnly) {
