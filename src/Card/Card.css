@@ -16,3 +16,7 @@ td.tableHeader > div {
 td.tableHeader {
     height: 50px;
 }
+
+.card_table {
+    width: 100%
+}

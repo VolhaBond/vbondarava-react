@@ -53,7 +53,7 @@ const Card = props => {
 
     return (
         <div className={cardClass}>
-            <table width="100%">
+            <table className="card_table">
                 <tbody>
                     <tr><td className="tableHeader">
                         <CardHeader
