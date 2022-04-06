@@ -1,0 +1,32 @@
+.input {
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+    width: 90%;
+    max-width: 40rem;
+  }
+  
+  .input label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input input {
+    font: inherit;
+    display: block;
+    width: 100%;
+    border: 1px dotted rgb(166, 170, 172);
+    padding: 0.15rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0;
+  }
+  
+  button {
+    background: rgb(227, 231, 233);
+    padding: 0.35rem 1.5rem;
+    cursor: pointer;
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0 1px 8px rgb(166, 170, 172);
+    max-width: 95%;  
+  }

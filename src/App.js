@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import CardList from './Card/CardList';
+import AddCard from './Card/AddCard';
 import { VscTrash } from 'react-icons/vsc';
 import './index.css';
 
@@ -78,9 +79,14 @@ const App = () => {
     setCheckedCards(updCheckedCards);
   }
 
+  const addCardHandler = newCard => {
+    setCards([...cards, newCard]);
+  }
+
   return (
     <div>
       <h1 className="header">Book library</h1>
+      <AddCard onAddCard={addCardHandler} />
       <VscTrash className="icon" onClick={cardDeleteSelectedHandler} />
       <label> <input type="checkbox" id="card_onlyviewmode" onClick={setViewModeOnlyHandler} />Только просмотр</label>
       <CardList cards={cards} viewModeOnlyChecked={viewModeOnlyChecked} onUpdate={cardUpdateHandler} onUpdateCheckedCardList={updateCheckedCardListHandler} />

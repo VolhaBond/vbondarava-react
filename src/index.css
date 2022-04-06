@@ -11,3 +11,8 @@
   border-radius: 12px;
   box-shadow: 0 1px 8px rgb(166, 170, 172);
 }
+
+.icon {
+  float:right;
+  font-size: 20px;
+}
