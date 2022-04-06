@@ -9,3 +9,14 @@
     border: 1px dotted rgb(166, 170, 172);
     border-radius: 0;
 }
+td.tableHeader > div {
+    height: 0px;
+    font-size: 20px;
+}
+td.tableHeader {
+    height: 50px;
+}
+
+.card_table {
+    width: 100%
+}
