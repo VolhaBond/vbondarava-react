@@ -1,7 +1,10 @@
 import './CardList.css';
 import Card from './Card';
+import LoaderHOC from '../Helpers/LoaderHOC';
 
-const CardList = props => {
+const CardExtended = LoaderHOC(Card);
+
+const CardList = props => {    
 
     const cardUpdateHandler = updatedCard => {
         props.onUpdate(updatedCard);
@@ -12,7 +15,7 @@ const CardList = props => {
     }
 
     return <div className="cards_grid">
-        {props.cards.map((card) => <Card className="card" key={card.id} card={card} viewModeOnly={props.viewModeOnlyChecked} onUpdate={cardUpdateHandler} onUpdateCheckedCardList={updateCheckedCardListHandler} />)}
+        {props.cards.map((card) => <CardExtended className="card" key={card.id} card={card} viewModeOnly={props.viewModeOnlyChecked} onUpdate={cardUpdateHandler} onUpdateCheckedCardList={updateCheckedCardListHandler} />)}
     </div>
 }
 

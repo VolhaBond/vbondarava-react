@@ -1,4 +1,5 @@
 import './Card.css';
+import Wrapper from '../Helpers/Wrapper';
 
 const CardBody = props => {
 
@@ -8,7 +9,7 @@ const CardBody = props => {
     }
 
     return (
-        <div >
+        <Wrapper >
 
             {props.viewMode ?
                 <div>
@@ -24,7 +25,7 @@ const CardBody = props => {
                 </div>
             }
 
-        </div>
+        </Wrapper>
     );
 }
 

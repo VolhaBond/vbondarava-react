@@ -8,7 +8,6 @@ const classNames = require('classnames');
 const Card = props => {
 
     const [updatedCard, setUpdatedCard] = useState({ ...props.card })
-
     const [viewMode, setViewMode] = useState(true);
     const [checked, setChecked] = useState(false);
 
