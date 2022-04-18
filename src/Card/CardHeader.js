@@ -1,8 +1,12 @@
+import {useContext} from 'react';
 import CardCheckBox from './CardCheckBox';
 import './Card.css';
 import { VscEdit, VscSave, VscClose } from 'react-icons/vsc';
+import CardCtx from '../Helpers/card-context';
 
 const CardHeader = props => {
+
+    const ctx = useContext(CardCtx);
 
     const cardSaveChangesHandler = () => {
         props.onUpdate();
@@ -28,7 +32,7 @@ const CardHeader = props => {
             <CardCheckBox checked={props.checked} onCheck={cardCheckHandler} />
         </div>);
 
-        if (props.viewModeOnly) {
+        if (ctx.viewModeOnlyChecked) {
             return <div>
                 {checkBoxContent}
             </div>

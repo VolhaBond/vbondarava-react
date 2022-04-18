@@ -4,7 +4,7 @@
   font-family: serif;
   font-size: 4rem;
 }
-.card {
+.cardItm {
   padding: 20px;
   margin: 20px;
   border-radius: 12px;
@@ -30,4 +30,6 @@ a:hover {
 
 .tab {
   margin: 20px;
+  font-family: serif;
+  font-size: 1rem;
 }

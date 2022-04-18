@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styles from './AddCard.module.css';
+import CardCtx from '../Helpers/card-context';
 const { v4: uuidv4 } = require('uuid');
 
 const classNames = require('classnames');
 
 const AddCard = props => {
+
+    const cardCtx = useContext(CardCtx);
     const [newCard, setNewCard] = useState({ title: '', description: '' });
 
     const addNewCardHandler = event => {
         event.preventDefault();
-        props.onAddCard({
+        cardCtx.onAddCard({
             title: newCard.title,
             description: newCard.description,
             id: uuidv4()
@@ -19,7 +22,7 @@ const AddCard = props => {
 
     const clearAndCloseModal = () => {
         setNewCard({ title: '', description: '' });
-        props.handleClose();
+        cardCtx.handleClose();
     }
 
     const handleObjChange = event => {
@@ -44,8 +47,8 @@ const AddCard = props => {
                 <label htmlFor="descr">Description</label>
                 <input id="descr" type="text" updatedfield="description" value={newCard.description} onChange={handleObjChange} />
                 <div className={styles.container}>
-                    <button type="submit" >Add and Close</button>
-                    <button type="button" onClick={clearAndCloseModal}>Cancel</button>
+                    <button type="submit" id={styles.addcard}>Add and Close</button>
+                    <button type="button" id={styles.addcard} onClick={clearAndCloseModal}>Cancel</button>
                 </div>
             </form>
         </section>
