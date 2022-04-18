@@ -58,19 +58,13 @@ const App = () => {
   }
 
   const cardDeleteSelectedHandler = () => {
-    let cardList = cards;
-    checkedCards.forEach(checkedCardId => { 
-      const index = cardList.map(cardElem => cardElem.id).indexOf(checkedCardId);
-      if (index !== -1) {
-        cardList.splice(index, 1);
-      }
-    });
-    setCards([...cardList]);
+    let cardList = [...cards];
+    setCards(cardList.filter(card => checkedCards.indexOf(card.id) === -1));
     setCheckedCards([]);
   }
 
   const updateCheckedCardListHandler = (cardId, isChecked) => {
-    const updCheckedCards = checkedCards;
+    const updCheckedCards = [...checkedCards];
     if (isChecked) {
       //add
       updCheckedCards.push(cardId);
