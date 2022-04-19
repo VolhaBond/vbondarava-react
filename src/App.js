@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import CardList from './Card/CardList';
+import { VscTrash } from 'react-icons/vsc';
 import './index.css';
 
 const App = () => {
@@ -43,6 +44,8 @@ const App = () => {
   }
   ]);
 
+  const [checkedCards, setCheckedCards] = useState([]);
+
   const cardUpdateHandler = updatedCard => {
     let cardsCopy = [...cards];
     const index = cardsCopy.findIndex(card => card.id === updatedCard.id);
@@ -54,11 +57,33 @@ const App = () => {
     setViewModeOnlyChecked(!viewModeOnlyChecked);
   }
 
+  const cardDeleteSelectedHandler = () => {
+    let cardList = [...cards];
+    setCards(cardList.filter(card => checkedCards.indexOf(card.id) === -1));
+    setCheckedCards([]);
+  }
+
+  const updateCheckedCardListHandler = (cardId, isChecked) => {
+    const updCheckedCards = [...checkedCards];
+    if (isChecked) {
+      //add
+      updCheckedCards.push(cardId);
+    } else {
+      //remove
+      const index = checkedCards.indexOf(cardId);
+      if (index !== -1) {
+        updCheckedCards.splice(index, 1);
+      }
+    }
+    setCheckedCards(updCheckedCards);
+  }
+
   return (
     <div>
       <h1 className="header">Book library</h1>
+      <VscTrash className="icon" onClick={cardDeleteSelectedHandler} />
       <label> <input type="checkbox" id="card_onlyviewmode" onClick={setViewModeOnlyHandler} />Только просмотр</label>
-        <CardList cards={cards} viewModeOnlyChecked={viewModeOnlyChecked} onUpdate={cardUpdateHandler} />
+      <CardList cards={cards} viewModeOnlyChecked={viewModeOnlyChecked} onUpdate={cardUpdateHandler} onUpdateCheckedCardList={updateCheckedCardListHandler} />
     </div>
   );
 }
