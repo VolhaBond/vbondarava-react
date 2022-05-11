@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
 import CardList from './Card/CardList';
+import AddCard from './Card/AddCard';
 import { VscTrash } from 'react-icons/vsc';
 import './index.css';
 
 const App = () => {
   const [viewModeOnlyChecked, setViewModeOnlyChecked] = useState(false);
+  const [show, setShow] = useState(false);
 
   const [cards, setCards] = useState([{
     id: 1,
@@ -78,9 +80,25 @@ const App = () => {
     setCheckedCards(updCheckedCards);
   }
 
+  const addCardHandler = newCard => {
+    setCards([...cards, newCard]);
+  }
+
+  const handleClose = () => {
+    setShow(false);
+  }
+
+  const showModal = () => {
+    setShow(true);
+  }
+  
   return (
     <div>
       <h1 className="header">Book library</h1>
+      <AddCard show={show} onAddCard={addCardHandler} handleClose={handleClose} />
+      <h3><button className="tab" onClick={showModal}>
+        <b> Добавить новую карточку</b>
+      </button></h3>
       <VscTrash className="icon" onClick={cardDeleteSelectedHandler} />
       <label> <input type="checkbox" id="card_onlyviewmode" onClick={setViewModeOnlyHandler} />Только просмотр</label>
       <CardList cards={cards} viewModeOnlyChecked={viewModeOnlyChecked} onUpdate={cardUpdateHandler} onUpdateCheckedCardList={updateCheckedCardListHandler} />

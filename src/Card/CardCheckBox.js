@@ -12,7 +12,6 @@ const CardCheckBox = props => {
     const checkCardHandler = e => {
         props.onCheck(e.target.checked);
     }
-
     return <StyledCardCheckBox checked={props.checked} onChange={checkCardHandler} />
 }
 

@@ -6,8 +6,29 @@
 }
 .card {
   padding: 20px;
-  background-color: rgb(227, 231, 233);
+  /*background-color: rgb(227, 231, 233);*/
   margin: 20px;
   border-radius: 12px;
   box-shadow: 0 1px 8px rgb(166, 170, 172);
+}
+
+.btnLink {
+  border: none;
+}
+
+.icon {
+  float:right;
+  font-size: 20px;
+}
+
+a {
+  font-style: italic;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.tab {
+  margin: 20px;
 }
