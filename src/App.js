@@ -95,7 +95,9 @@ const App = () => {
   return (
     <div>
       <h1 className="header">Book library</h1>
-      <AddCard show={show} onAddCard={addCardHandler} handleClose={handleClose} />
+
+      {show && <AddCard onAddCard={addCardHandler} handleClose={handleClose} />}
+
       <h3><button className="tab" onClick={showModal}>
         <b> Добавить новую карточку</b>
       </button></h3>

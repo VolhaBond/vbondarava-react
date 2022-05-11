@@ -32,9 +32,7 @@ const AddCard = props => {
 
     const newCardClass = classNames(
         styles.input,
-        styles.modal,
-        { [`${styles["display-block"]}`]: props.show },
-        { [`${styles["display-none"]}`]: !props.show }
+        styles.modal
     );
 
     return (<div className={newCardClass} >
