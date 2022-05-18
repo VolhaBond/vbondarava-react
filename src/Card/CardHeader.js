@@ -1,5 +1,4 @@
 import CardCheckBox from './CardCheckBox';
-import Wrapper from '../Helpers/Wrapper';
 import './Card.css';
 import { VscEdit, VscSave, VscClose } from 'react-icons/vsc';
 
@@ -48,9 +47,9 @@ const CardHeader = props => {
     }
 
     return (
-        <Wrapper >
+        < >
             {header()}
-        </Wrapper>
+        </>
     );
 }
 
