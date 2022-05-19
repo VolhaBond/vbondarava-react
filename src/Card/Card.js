@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
+import LoaderHOC from '../Helpers/LoaderHOC';
 import './Card.css';
 
 const classNames = require('classnames');
@@ -81,4 +82,4 @@ const Card = props => {
     );
 }
 
-export default Card;
+export default LoaderHOC(Card);
