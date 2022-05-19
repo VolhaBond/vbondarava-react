@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
+import LoaderHOC from '../Helpers/LoaderHOC';
 import './Card.css';
 
 const classNames = require('classnames');
@@ -8,7 +9,6 @@ const classNames = require('classnames');
 const Card = props => {
 
     const [updatedCard, setUpdatedCard] = useState({ ...props.card })
-
     const [viewMode, setViewMode] = useState(true);
     const [checked, setChecked] = useState(false);
 
@@ -82,4 +82,4 @@ const Card = props => {
     );
 }
 
-export default Card;
+export default LoaderHOC(Card);

@@ -1,7 +1,7 @@
 import './CardList.css';
 import Card from './Card';
 
-const CardList = props => {
+const CardList = props => {    
 
     const cardUpdateHandler = updatedCard => {
         props.onUpdate(updatedCard);

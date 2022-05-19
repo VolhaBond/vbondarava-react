@@ -8,7 +8,7 @@ const CardBody = props => {
     }
 
     return (
-        <div >
+        <>
 
             {props.viewMode ?
                 <div>
@@ -24,7 +24,7 @@ const CardBody = props => {
                 </div>
             }
 
-        </div>
+        </>
     );
 }
 

@@ -47,9 +47,9 @@ const CardHeader = props => {
     }
 
     return (
-        <div >
+        <>
             {header()}
-        </div>
+        </>
     );
 }
 
