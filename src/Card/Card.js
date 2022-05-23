@@ -4,7 +4,7 @@ import CardBody from './CardBody';
 import LoaderHOC from '../Helpers/LoaderHOC';
 import './Card.css';
 import PropTypes from 'prop-types';
-import CardCtx from '../Helpers/card-context';
+import CardCtx from '../context/card-context';
 
 const classNames = require('classnames');
 

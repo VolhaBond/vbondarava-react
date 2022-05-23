@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import styles from './AddCard.module.css';
-import CardCtx from '../Helpers/card-context';
+import CardCtx from '../context/card-context';
 const { v4: uuidv4 } = require('uuid');
 
 const classNames = require('classnames');
@@ -46,9 +46,9 @@ const AddCard = props => {
                 <input id="title" type="text" updatedfield="title" value={newCard.title} onChange={handleObjChange} />
                 <label htmlFor="descr">Description</label>
                 <input id="descr" type="text" updatedfield="description" value={newCard.description} onChange={handleObjChange} />
-                <div className={styles.container}>
-                    <button type="submit" id={styles.addcard}>Add and Close</button>
-                    <button type="button" id={styles.addcard} onClick={clearAndCloseModal}>Cancel</button>
+                <div id={styles.addcard} className={styles.container}>
+                    <button type="submit" >Add and Close</button>
+                    <button type="button" onClick={clearAndCloseModal}>Cancel</button>
                 </div>
             </form>
         </section>

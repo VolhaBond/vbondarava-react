@@ -2,7 +2,7 @@ import {useContext} from 'react';
 import CardCheckBox from './CardCheckBox';
 import './Card.css';
 import { VscEdit, VscSave, VscClose } from 'react-icons/vsc';
-import CardCtx from '../Helpers/card-context';
+import CardCtx from '../context/card-context';
 
 const CardHeader = props => {
 

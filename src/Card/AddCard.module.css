@@ -32,15 +32,16 @@
     max-width: 40%;  
     text-align: center;
     display: inline-block;
-    margin-top: 10px;
-    margin-right: 15px;
+  
   }
 
   #addcard{
-    margin: 0.5em;
+    margin: 1em;
     font-family: serif;
-    font-size: 0.5em;
-    line-height: 0.5em;
+    font-size: 1em;
+    line-height: 1em;
+    margin-top: 15px;
+    padding: 5px;
   }
 
   .container {

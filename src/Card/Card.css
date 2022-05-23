@@ -21,6 +21,6 @@ td.tableHeader {
     width: 100%
 }
 
-#inherited-styles {
+.inherited_styles {
     opacity: inherit;
 }
