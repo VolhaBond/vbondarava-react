@@ -1,18 +1,22 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import LoaderHOC from '../Helpers/LoaderHOC';
 import './Card.css';
+import PropTypes from 'prop-types';
+import CardCtx from '../context/card-context';
 
 const classNames = require('classnames');
 
 const Card = props => {
 
+    const ctx = useContext(CardCtx);
+    
     const [updatedCard, setUpdatedCard] = useState({ ...props.card })
     const [viewMode, setViewMode] = useState(true);
     const [checked, setChecked] = useState(false);
 
-    if (props.viewModeOnly && !viewMode) {
+    if (ctx.viewModeOnlyChecked && !viewMode) {
         setViewMode(true);
         setUpdatedCard({
             ...props.card
@@ -27,16 +31,16 @@ const Card = props => {
 
     const cardUpdateHandler = () => {
         setViewMode(true);
-        props.onUpdate(updatedCard);
+        ctx.cardUpdateHandler(updatedCard);
     }
 
     const setCheckedHandler = isChecked => {
         setChecked(isChecked);
-        props.onUpdateCheckedCardList(props.card.id, isChecked);
+        ctx.updateCheckedCardListHandler(props.card.id, isChecked);
     }
 
     const cardClass = classNames(
-        props.className,
+        ctx.className,
         { 'card_selected': checked }
     );
 
@@ -53,14 +57,13 @@ const Card = props => {
     }
 
     return (
-        <div className={cardClass}>
+            <div className={cardClass}>
             <table className="card_table">
                 <tbody>
                     <tr><td className="tableHeader">
                         <CardHeader
                             card={props.card}
                             viewMode={viewMode}
-                            viewModeOnly={props.viewModeOnly}
                             checked={checked}
                             onSetViewMode={setViewModeHandler}
                             onUpdate={cardUpdateHandler}
@@ -81,5 +84,15 @@ const Card = props => {
         </div>
     );
 }
+
+Card.propTypes = {
+    viewModeOnlyChecked: PropTypes.bool,
+    card: PropTypes.exact({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        description: PropTypes.string
+      }),
+    className: PropTypes.string
+};
 
 export default LoaderHOC(Card);

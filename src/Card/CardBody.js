@@ -9,21 +9,19 @@ const CardBody = props => {
 
     return (
         <>
-
             {props.viewMode ?
                 <div>
                     <p>{props.card.title}</p>
-                    <hr />
+                    <hr className="inherited_styles"/>
                     <p>{props.card.description}</p>
                 </div>
                 :
                 <div>
                     <p><input type="text" updatedproperty="title" className="inputTextBox" value={props.updatedCard.title} onChange={handleObjChange} /></p>
-                    <hr />
+                    <hr className="inherited_styles"/>
                     <p><input type="text" updatedproperty="description" className="inputTextBox" value={props.updatedCard.description} onChange={handleObjChange} /></p>
                 </div>
             }
-
         </>
     );
 }
