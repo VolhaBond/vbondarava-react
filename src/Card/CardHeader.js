@@ -7,6 +7,7 @@ import CardCtx from '../context/card-context';
 const CardHeader = props => {
 
     const ctx = useContext(CardCtx);
+    const iconClass = "icon";
 
     const cardSaveChangesHandler = () => {
         props.onUpdate();
@@ -39,13 +40,13 @@ const CardHeader = props => {
         } else {
             if (props.viewMode) {
                 return <div>
-                    <VscEdit className="icon" onClick={cardEditHandler} />
+                    <VscEdit className={iconClass} onClick={cardEditHandler} />
                     {checkBoxContent}
                 </div>
             }
             return <div className="icon">
-                <VscSave onClick={cardSaveChangesHandler} />
-                <VscClose onClick={cardCloseHandler} />
+                <VscSave className={iconClass} onClick={cardSaveChangesHandler} />
+                <VscClose className={iconClass} onClick={cardCloseHandler} />
             </div>
         }
     }

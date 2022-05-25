@@ -16,6 +16,7 @@ const App = () => {
         Cards
         <Badge className="badge bg-secondary">{cardCtx.getCount()}</Badge>
       </h1>
+      {cardCtx.error && <h2>cardCtx.error</h2>} 
       {cardCtx.show && <AddCard />}
       <h3><button type="button" className="tab" onClick={cardCtx.showModal}>
         <b>Добавить новую карточку</b>
