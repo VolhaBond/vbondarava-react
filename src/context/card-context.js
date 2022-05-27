@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const CardCtx = React.createContext({
   cards: [],
   viewModeOnlyChecked: false,
   show: false,
-  error: null,
   cardsCount: 0,
   className: '',
   getCount: () => { },
@@ -20,37 +20,30 @@ export const CardCtxProvider = props => {
 
   const [viewModeOnlyChecked, setViewModeOnlyChecked] = useState(false);
   const [show, setShow] = useState(false);
-  const [error, setError] = useState(null);
   const [cards, setCards] = useState([]);
-  const axios = require('axios');
 
-  const fetchCardsHandler = useCallback(async () => {
-    setError(null);
-    try {
-      const response = await axios.get('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json');
+  
+
+  useEffect(() => {
+    axios.get('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json')
+    .then(response => {
       if (response.status !== 200) {
         throw new Error("There is an issue...");
       }
-      const data = await response.data;
-      let transformedData = [];
-      for (let i = 0; i <= data.length && i < 15; i++) {
-        const row = data[i];
-        transformedData.push({
-          id: row.Number,
-          title: row.Name,
-          description: row.About
-        })
-      }
+      const data = response.data.splice(0, 15);
+      const transformedData = data.map(el => (
+        {
+          id: el.Number,
+          title: el.Name,
+          description: el.About
+        }
+      ));
       setCards([...transformedData]);
-    } catch (error) {
-      setError(error.message);
-      console.log(error);
-    }
-  }, [axios]);
-
-  useEffect(() => {
-    fetchCardsHandler();
-  }, [fetchCardsHandler]);
+    })
+    .catch(function (err) {
+      console.log(err);  
+    })
+  }, []);
 
 
   const [checkedCards, setCheckedCards] = useState([]);
@@ -106,7 +99,6 @@ export const CardCtxProvider = props => {
   return <CardCtx.Provider value={{
     cards: cards,
     show: show,
-    error: error,
     className: 'cardItm',
     getCount: getCount,
     viewModeOnlyChecked: viewModeOnlyChecked,
