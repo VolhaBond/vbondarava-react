@@ -1,67 +1,56 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const CardCtx = React.createContext({
-    cards: [],
-    viewModeOnlyChecked: false,
-    show: false,
-    cardsCount: 0,
-    className: '',
-    getCount: () => {},
-    onAddCard: (newCard) => {},
-    onDeleteSelected: () => {},
-    setViewModeOnlyHandler: () => {},
-    cardUpdateHandler: (updatedCard) => {},
-    updateCheckedCardListHandler: (cardId, isChecked) => {},
-    showModal: () => {}
+  cards: [],
+  viewModeOnlyChecked: false,
+  show: false,
+  cardsCount: 0,
+  className: '',
+  getCount: () => { },
+  onAddCard: (newCard) => { },
+  onDeleteSelected: () => { },
+  setViewModeOnlyHandler: () => { },
+  cardUpdateHandler: (updatedCard) => { },
+  updateCheckedCardListHandler: (cardId, isChecked) => { },
+  showModal: () => { }
 });
 
 export const CardCtxProvider = props => {
 
-const [viewModeOnlyChecked, setViewModeOnlyChecked] = useState(false);
-const [show, setShow] = useState(false);
+  const [viewModeOnlyChecked, setViewModeOnlyChecked] = useState(false);
+  const [show, setShow] = useState(false);
+  const [cards, setCards] = useState([]);
 
-  const [cards, setCards] = useState([{
-    id: '1',
-    title: 'Core Java Volume I – Fundamentals',
-    description: 'Java reference book. ',
-  },
-  {
-    id: '2',
-    title: 'Title2',
-    description: 'Description2. ',
-  },
-  {
-    id: '3',
-    title: 'Title3',
-    description: 'Description3. ',
-  },
-  {
-    id: '4',
-    title: 'Title4',
-    description: 'Description4. ',
-  },
-  {
-    id: '5',
-    title: 'Title5',
-    description: 'Description5. ',
-  },
-  {
-    id: '6',
-    title: 'Title6',
-    description: 'Description6. ',
-  },
-  {
-    id: '7',
-    title: 'Title7',
-    description: 'Description7. ',
-  }
-  ]);
+  
+
+  useEffect(() => {
+    axios.get('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json')
+    .then(response => {
+      if (response.status !== 200) {
+        throw new Error("There is an issue...");
+      }
+      const data = response.data.splice(0, 15);
+      const transformedData = data.map(el => (
+        {
+          id: el.Number,
+          title: el.Name,
+          description: el.About
+        }
+      ));
+      setCards([...transformedData]);
+    })
+    .catch(function (err) {
+      console.log(err);  
+    })
+  }, []);
+
 
   const [checkedCards, setCheckedCards] = useState([]);
 
   const getCount = () => {
     return cards.length;
-}
+  }
 
   const cardUpdateHandler = updatedCard => {
     let cardsCopy = [...cards];
@@ -107,20 +96,20 @@ const [show, setShow] = useState(false);
     setShow(true);
   }
 
-    return <CardCtx.Provider value={{
-        cards: cards,
-        show: show,
-        className: 'cardItm',
-        getCount: getCount,
-        viewModeOnlyChecked: viewModeOnlyChecked,
-        onAddCard: addCardHandler,
-        handleClose: closeModalHandler,
-        showModal: showModal,
-        onDeleteSelected: cardDeleteSelectedHandler,
-        setViewModeOnlyHandler: setViewModeOnlyHandler,
-        cardUpdateHandler: cardUpdateHandler,
-        updateCheckedCardListHandler: updateCheckedCardListHandler
-    }}>{props.children}</CardCtx.Provider>;
+  return <CardCtx.Provider value={{
+    cards: cards,
+    show: show,
+    className: 'cardItm',
+    getCount: getCount,
+    viewModeOnlyChecked: viewModeOnlyChecked,
+    onAddCard: addCardHandler,
+    handleClose: closeModalHandler,
+    showModal: showModal,
+    onDeleteSelected: cardDeleteSelectedHandler,
+    setViewModeOnlyHandler: setViewModeOnlyHandler,
+    cardUpdateHandler: cardUpdateHandler,
+    updateCheckedCardListHandler: updateCheckedCardListHandler
+  }}>{props.children}</CardCtx.Provider>;
 }
 
 export default CardCtx;
