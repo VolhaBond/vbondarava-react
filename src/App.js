@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Routes, Route, NavLink, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import Cards from './pages/Cards';
 import PageNotFound from './pages/PageNotFound';
 import SignIn from './pages/SignIn';
@@ -8,23 +8,19 @@ import './index.css';
 
 const App = () => {
   const userCtx = useContext(UserCtx);
-  const currPath = useLocation().pathname;
-
+  
   return (
     <div>
-      <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='home' className="icon_left" >Home</NavLink>
-      {userCtx.userName ?
-        (<div className="icon_right">{userCtx.userName} <Link to='/signin' onClick={userCtx.logOut}>SignOut</Link></div>)
-        :
-        (currPath === '/signin' ? <div className="icon_right">You are on SignOn</div> : <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='signin' className="icon_right" >Sign In</NavLink>)
-      }
-
+      <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='home' >Home</NavLink>
+      <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='signin' >Sign In</NavLink>
+      
+{userCtx.userName} 
       <Routes>
-        <Route path="/*" element={<PageNotFound />} />
+        <Route path="/" element={<Navigate to='home' />} />
         <Route path="/home" element={<Cards />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
-
     </div >
   );
 }

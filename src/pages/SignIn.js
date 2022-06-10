@@ -13,13 +13,9 @@ const SignIn = props => {
     
     const signOnHandler = event => {
         event.preventDefault(); 
-        if(!userData.userName || userData.userName.length === 0 || !userData.password || userData.password.lengt === 0){
-            alert('User name and password are mandatory to fill!');
-            return false;
-        }else{
-            navigate('/home');
-            userCtx.logIn(userData.userName);
-        }
+    
+        navigate('/home');
+        userCtx.logIn(userData.userName);
     }
 
     const handleObjChange = event => {
