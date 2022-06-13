@@ -29,6 +29,11 @@ a {
   font-style: italic;
 }
 
+.error {
+  font-style: italic;
+  color: red;
+}
+
 a:hover {
   text-decoration: underline;
 }
@@ -85,6 +90,13 @@ a:hover {
   text-align: center;
   display: inline-block;
 
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #777272;
+  border-color: #ccc;
+  cursor: not-allowed;
 }
 
 .input input {

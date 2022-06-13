@@ -1,30 +1,45 @@
 import {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import UserCtx from '../context/user-context';
+import EnhancedInput from '../Helpers/EnhancedInput';
+import validations from '../Helpers/Validations';
 
 const SignIn = props => {
 
     const userCtx = useContext(UserCtx);
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
-        userName: '',
+        username: '',
         password: ''
     });
-    
+
+    const [fieldHasError, setFieldHasError] = useState({
+        username: false,
+        password: false
+    });
+
+    const emailValidations = [validations.required, validations.emailPattern];
+    const passwordValidations = [validations.required, validations.minLength,validations.passwordPattern];
+
     const signOnHandler = event => {
         event.preventDefault(); 
-    
         navigate('/home');
-        userCtx.logIn(userData.userName);
+        userCtx.logIn(userData.username);
     }
 
-    const handleObjChange = event => {
-        const updatedField = event.target.getAttribute("updatedfield");
+    const handleObjChange = (field, value, errorText) => {
         setUserData({
             ...userData,
-            [updatedField]: event.target.value
+            [field]: value
+        });
+        
+        setFieldHasError({
+            ...fieldHasError,
+            [field]: errorText ? false : true
         });
     }
+
+    const formIsValid = fieldHasError.username && fieldHasError.password;
 
     return (
         <div className='input' >
@@ -33,15 +48,25 @@ const SignIn = props => {
                     <h1 className="header">
                         Sign in here.
                     </h1>
-                    <label htmlFor='username'>User name</label>
-                    <br />
-                    <input type='text' id='username' updatedfield="userName" value={userData.userName} onChange={handleObjChange} />
-                    <br />
-                    <label htmlFor='username'>Password</label>
-                    <br />
-                    <input type='password' autoComplete='on' id='password' updatedfield="password" value={userData.password} onChange={handleObjChange} />
-                    <br />
-                    <button type='submit' className="modal_form"> Login</button>
+                    <EnhancedInput 
+                        type="text" 
+                        id="username" 
+                        label="User name" 
+                        handleObjChange={handleObjChange} 
+                        validate={validations.composeValidators(...emailValidations)}
+                        autocomplete="off"
+                    />
+                    
+                    <EnhancedInput 
+                        type="password" 
+                        id="password" 
+                        label="Password" 
+                        handleObjChange={handleObjChange} 
+                        validate={validations.composeValidators(...passwordValidations)}
+                        autocomplete="on"
+                    />
+                    
+                     <button type='submit' disabled={!formIsValid} className="modal_form"> Login</button>
                 </form>
             </section>
         </div>
