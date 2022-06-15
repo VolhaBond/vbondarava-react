@@ -1,30 +1,28 @@
 import { useContext } from 'react';
-import CardCtx from './context/card-context.js';
-import CardList from './Card/CardList';
-import AddCard from './Card/AddCard';
-import { VscTrash } from 'react-icons/vsc';
+import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import Cards from './pages/Cards';
+import PageNotFound from './pages/PageNotFound';
+import SignIn from './pages/SignIn';
+import UserCtx from './context/user-context';
 import './index.css';
-import Badge from 'react-bootstrap/Badge';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
-// /{cardCtx.error && <h2>{cardCtx.error}</h2>} 
-  const cardCtx = useContext(CardCtx);
+  const userCtx = useContext(UserCtx);
+
   return (
     <div>
-      <h1 className="header">
-        Cards
-        <Badge className="badge bg-secondary">{cardCtx.getCount()}</Badge>
-      </h1>
-       
-      {cardCtx.show && <AddCard />}
-      <h3><button type="button" className="tab" onClick={cardCtx.showModal}>
-        <b>Добавить новую карточку</b>
-      </button></h3>
-      <VscTrash className="icon_right" onClick={cardCtx.onDeleteSelected} />
-      <label className="icon_left" > <input type="checkbox" id="card_onlyviewmode" onClick={cardCtx.setViewModeOnlyHandler} />Только просмотр</label>
-      <CardList />
-    </div>
+      <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='home' >Home</NavLink>
+      <div className="icon_right">
+        {!userCtx.userName && <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='signin' >Sign In</NavLink>}
+        {userCtx.userName}
+      </div>
+      <Routes>
+        <Route path="/" element={<Navigate to='home' />} />
+        <Route path="/home" element={<Cards />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/*" element={<PageNotFound />} />
+      </Routes>
+    </div >
   );
 }
 

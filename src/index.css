@@ -38,3 +38,62 @@ a:hover {
   font-family: serif;
   font-size: 1rem;
 }
+
+.active {
+  color: #95bcf0;
+  padding-bottom: 0.25rem;
+  border-bottom: 4px solid #95bcf0;
+}
+
+.centered_item{
+  text-align: center;
+}
+
+.large_font{
+  font-size: 1.5rem;
+}
+
+.modal-main {
+  position:fixed;
+  background: white;
+  width: 50%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgb(166, 170, 172);
+}
+
+.input {
+  margin: 20px;
+  padding: 0.5rem;
+  width:40%;
+}
+
+.modal_form{
+  font-family: serif;
+  font-size: 1.5em;
+  line-height: 1em;
+  background: white; /*rgb(227, 231, 233); */
+  padding: 0.35rem 1.5rem;
+  cursor: pointer;
+  border-radius: 0;
+  border: 0;
+  box-shadow: 0 1px 8px rgb(166, 170, 172);
+  width: 96%;  
+  text-align: center;
+  display: inline-block;
+
+}
+
+.input input {
+  font: inherit;
+  display: block;
+  width: 95%;
+  border: 1px dotted rgb(166, 170, 172);
+  padding: 0.15rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0;
+}
+
