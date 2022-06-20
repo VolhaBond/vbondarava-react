@@ -21,6 +21,23 @@ const SignIn = props => {
     const emailValidations = [validations.required, validations.emailPattern];
     const passwordValidations = [validations.required, validations.minLength,validations.passwordPattern];
 
+    const inputsData = [
+        {
+            type: "text", 
+            id: "username", 
+            label: "User name",
+            rules: emailValidations,
+            autocomplete: "off"
+        },
+        {
+            type: "password", 
+            id: "password", 
+            label: "Password",
+            rules: passwordValidations,
+            autocomplete: "on"
+        },
+    ]
+
     const signOnHandler = event => {
         event.preventDefault(); 
         navigate('/home');
@@ -48,25 +65,17 @@ const SignIn = props => {
                     <h1 className="header">
                         Sign in here.
                     </h1>
-                    <EnhancedInput 
-                        type="text" 
-                        id="username" 
-                        label="User name" 
-                        handleObjChange={handleObjChange} 
-                        validate={validations.composeValidators(...emailValidations)}
-                        autocomplete="off"
-                    />
+
+                    {inputsData.map(input => 
+                        <EnhancedInput 
+                            key={input.id}
+                            {...input}
+                            handleObjChange={handleObjChange} 
+                            validate={validations.composeValidators(...input.rules)}
+                        />
+                    )}
                     
-                    <EnhancedInput 
-                        type="password" 
-                        id="password" 
-                        label="Password" 
-                        handleObjChange={handleObjChange} 
-                        validate={validations.composeValidators(...passwordValidations)}
-                        autocomplete="on"
-                    />
-                    
-                     <button type='submit' disabled={!formIsValid} className="modal_form"> Login</button>
+                    <button type='submit' disabled={!formIsValid} className="modal_form"> Login</button>
                 </form>
             </section>
         </div>
