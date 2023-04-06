@@ -1,22 +1,25 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import { cardActions } from '../store/card';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import LoaderHOC from '../Helpers/LoaderHOC';
 import './Card.css';
 import PropTypes from 'prop-types';
-import CardCtx from '../context/card-context';
 
 const classNames = require('classnames');
 
 const Card = props => {
 
-    const ctx = useContext(CardCtx);
+    const dispatch = useDispatch();
+    const viewModeOnlyChecked = useSelector(state => state.card.viewModeOnlyChecked);
+    const className = useSelector(state => state.card.className);
     
     const [updatedCard, setUpdatedCard] = useState({ ...props.card })
     const [viewMode, setViewMode] = useState(true);
     const [checked, setChecked] = useState(false);
 
-    if (ctx.viewModeOnlyChecked && !viewMode) {
+    if (viewModeOnlyChecked && !viewMode) {
         setViewMode(true);
         setUpdatedCard({
             ...props.card
@@ -30,17 +33,17 @@ const Card = props => {
     }
 
     const cardUpdateHandler = () => {
+        dispatch(cardActions.cardUpdateHandler(updatedCard));
         setViewMode(true);
-        ctx.cardUpdateHandler(updatedCard);
     }
 
     const setCheckedHandler = isChecked => {
         setChecked(isChecked);
-        ctx.updateCheckedCardListHandler(props.card.id, isChecked);
+        dispatch(cardActions.updateCheckedCardListHandler({cardId: props.card.id, isChecked}));
     }
 
     const cardClass = classNames(
-        ctx.className,
+        className,
         { 'card_selected': checked }
     );
 

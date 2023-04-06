@@ -1,12 +1,11 @@
-import {useContext} from 'react';
+import { useSelector } from 'react-redux';
 import CardCheckBox from './CardCheckBox';
 import './Card.css';
 import { VscEdit, VscSave, VscClose } from 'react-icons/vsc';
-import CardCtx from '../context/card-context';
 
 const CardHeader = props => {
 
-    const ctx = useContext(CardCtx);
+    const viewModeOnlyChecked = useSelector(state => state.card.viewModeOnlyChecked);
     const iconClass = "icon";
 
     const cardSaveChangesHandler = () => {
@@ -33,7 +32,7 @@ const CardHeader = props => {
             <CardCheckBox checked={props.checked} onCheck={cardCheckHandler} />
         </div>);
 
-        if (ctx.viewModeOnlyChecked) {
+        if (viewModeOnlyChecked) {
             return <div>
                 {checkBoxContent}
             </div>

@@ -1,18 +1,16 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
+import {Provider} from 'react-redux';
 import './index.css';
 import App from './App';
-import { CardCtxProvider } from './context/card-context';
-import { UserCtxProvider } from './context/user-context';
 import { BrowserRouter } from 'react-router-dom';
+import store from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <UserCtxProvider>
-        <CardCtxProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </CardCtxProvider>
-    </UserCtxProvider>
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>
 );
