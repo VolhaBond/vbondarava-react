@@ -1,12 +1,13 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserCtx from '../context/user-context';
+import { useDispatch } from 'react-redux';
 import EnhancedInput from '../Helpers/EnhancedInput';
 import validations from '../Helpers/Validations';
+import { userActions } from '../store/user';
 
 const SignIn = props => {
 
-    const userCtx = useContext(UserCtx);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
         username: {
@@ -42,7 +43,7 @@ const SignIn = props => {
     const signOnHandler = event => {
         event.preventDefault();
         navigate('/home');
-        userCtx.logIn(userData.username.value);
+        dispatch(userActions.logInHandler(userData.username.value));
     }
 
     const handleObjChange = (field, value, errorText) => {

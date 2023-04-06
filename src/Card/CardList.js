@@ -1,13 +1,14 @@
-import {useContext} from 'react';
+import {useSelector} from 'react-redux';
 import './CardList.css';
-import CardCtx from '../context/card-context';
 import Card from './Card';
 
+
 const CardList = props => {
-    const ctx = useContext(CardCtx);
-   
+    
+    const cards = useSelector(state => state.card.cards);
+
     return <div className="cards_grid">
-        {ctx.cards.map((card) => <Card key={card.id} card={card} />)}
+        {cards.map((card) => <Card key={card.id} card={card} />)}
     </div>
 }
 

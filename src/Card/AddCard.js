@@ -1,28 +1,29 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { cardActions } from '../store/card';
 import styles from './AddCard.module.css';
-import CardCtx from '../context/card-context';
 const { v4: uuidv4 } = require('uuid');
 
 const classNames = require('classnames');
 
 const AddCard = props => {
 
-    const cardCtx = useContext(CardCtx);
+    const dispatch = useDispatch();
     const [newCard, setNewCard] = useState({ title: '', description: '' });
 
     const addNewCardHandler = event => {
         event.preventDefault();
-        cardCtx.onAddCard({
+        dispatch(cardActions.addCardHandler({
             title: newCard.title,
             description: newCard.description,
             id: uuidv4()
-        });
+        }));
         clearAndCloseModal();
     }
 
     const clearAndCloseModal = () => {
         setNewCard({ title: '', description: '' });
-        cardCtx.handleClose();
+        dispatch(cardActions.closeModalHandler());
     }
 
     const handleObjChange = event => {
