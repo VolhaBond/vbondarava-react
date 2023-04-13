@@ -7,12 +7,24 @@ import PageNotFound from './pages/PageNotFound';
 import SignIn from './pages/SignIn';
 import { cardActions } from './store/card';
 import './index.css';
+import { fetchUserData, logoutUser } from './store/user-action';
+import { useCallback } from 'react';
+import Settings from './pages/Settings';
 
 const App = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserData());
+  }, [dispatch]);
+
+  const logout = useCallback(() => {
+    dispatch(logoutUser());
+  }, [dispatch]);
+ 
   const userName = useSelector(state => state.user.userName);
-  //const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-    
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const isAdmin = useSelector(state => state.user.isAdmin);
    
 useEffect(() => {
   axios.get('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json')
@@ -35,17 +47,32 @@ useEffect(() => {
   })
 }, [dispatch]);
 
+  function renderAuthButton() {
+         if(!isLoggedIn){
+          return <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='signin' >Sign In</NavLink>;
+         } else {
+          return <a href="/home" onClick={logout}>Logout</a>;
+         }
+  }
+
+console.log(isAdmin);
+
   return (
     <div>
+      {/*<p>Is admin - {isAdmin ? 'yes' : 'no'}</p>*/}
+      {isAdmin && <NavLink to='settings' >Settings</NavLink>}
+      {userName && <p>Приветствую, {userName}</p>}
+                
       <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='home' >Home</NavLink>
       <div className="icon_right">
-        {!userName && <NavLink className={(navData) => navData.isActive ? 'active' : ''} to='signin' >Sign In</NavLink>}
-        {userName}
+        {renderAuthButton()}
+        
       </div>
       <Routes>
         <Route path="/" element={<Navigate to='home' />} />
         <Route path="/home" element={<Cards />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </div >

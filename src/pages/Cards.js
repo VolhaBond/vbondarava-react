@@ -10,14 +10,9 @@ const Cards = props => {
     const dispatch = useDispatch();
     const count = useSelector(state => state.card.cards.length);
     const showModal = useSelector(state => state.card.show);
-    const viewModeOnlyChecked = useSelector(state => state.card.viewModeOnlyChecked);
-
+    
     const showModalHandler = () => {
         dispatch(cardActions.showModal());
-    }
-
-    const setViewModeHandler = () => {
-        dispatch(cardActions.setViewModeOnlyHandler());
     }
 
     const cardDeleteHandler = () => {
@@ -34,7 +29,6 @@ const Cards = props => {
             <b>Добавить новую карточку</b>
         </button></h3>
         <VscTrash className="icon_right" onClick={cardDeleteHandler} />
-        <label className="icon_left" > <input type="checkbox" id="card_onlyviewmode" checked={viewModeOnlyChecked} onChange={setViewModeHandler} />Только просмотр</label>
         <CardList />
     </>);
 }

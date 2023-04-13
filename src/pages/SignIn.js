@@ -5,10 +5,13 @@ import EnhancedInput from '../Helpers/EnhancedInput';
 import validations from '../Helpers/Validations';
 import { userActions } from '../store/user';
 
+
+
 const SignIn = props => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
     const [userData, setUserData] = useState({
         username: {
             value: '',
@@ -43,7 +46,7 @@ const SignIn = props => {
     const signOnHandler = event => {
         event.preventDefault();
         navigate('/home');
-        dispatch(userActions.logInHandler(userData.username.value));
+        dispatch(userActions.logInHandler({userName: userData.username.value, password: userData.password.value}));
     }
 
     const handleObjChange = (field, value, errorText) => {
