@@ -1,12 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import {createLogger} from 'redux-logger'
+import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
 
 import cardReducer from './card';
 import userReducer from './user';
 
-const logger = createLogger({
-    log: 'info',
-})
+export const logger = store => next => action => {
+    console.log("Action is " + action.type + ", params are: " + JSON.stringify(action.payload) );
+    next(action);
+  }
 
 const store = configureStore({
     reducer: {
